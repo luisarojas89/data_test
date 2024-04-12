@@ -30,7 +30,15 @@ explore: data_llamadas {}
 
 explore: data_llamada_hora {}
 
-explore: data_motivos_chats {}
+explore: data_motivos_chats {
+  join: data_motivos_llamadas {
+    type: left_outer
+    sql_on: ${data_motivos_chats.id_customer}=${data_motivos_llamadas.id_customer} ;;
+    relationship: one_to_one
+    # FILTRO/ sql_where: ${sap_interfaz_recaudo.textodocumento}!= "CARGO MATRICULA EXTRAORD" ;;
+      }
+
+}
 
 explore: data_motivos_llamadas {}
 
@@ -53,4 +61,3 @@ explore: historico_desembolso_mensual {}
 explore: historico_estado_cliente {}
 
 explore: historico_solicitud_mensual {}
-
